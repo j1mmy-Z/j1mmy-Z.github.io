@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://j1mmy-z.github.io/"/>
-  <updated>2020-05-04T02:57:53.290Z</updated>
+  <updated>2020-05-04T07:11:35.236Z</updated>
   <id>http://j1mmy-z.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建个人博客的第一天</title>
+    <link href="http://j1mmy-z.github.io/2020/05/04/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
+    <id>http://j1mmy-z.github.io/2020/05/04/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%AC%AC%E4%B8%80%E5%A4%A9/</id>
+    <published>2020-05-04T06:58:48.000Z</published>
+    <updated>2020-05-04T07:11:35.236Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="http://j1mmy-Z.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="http://j1mmy-Z.github.io/tags/Hexo/"/>
+    
+      <category term="博客" scheme="http://j1mmy-Z.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World!!!!</title>
