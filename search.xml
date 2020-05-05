@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hexo搭建个人博客</title>
+      <link href="/2020/05/04/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+      <url>/2020/05/04/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>欢迎来到<a href="https://jimmyz.top" target="_blank" rel="noopener">我的博客</a>!这是我第一次使用<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>来创建个人博客，我的博客用了<a href="https://jerryc.me" target="_blank" rel="noopener">JerryC</a>大佬设计的<a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener">butterfly</a>主题，感兴趣的各位可以体验一下！本人初次创建博客，还有许多不足，欢迎各位提出宝贵的意见和建议，也希望喜欢的朋友多多收藏！</p><h1 id="Hexo是什么"><a href="#Hexo是什么" class="headerlink" title="Hexo是什么"></a>Hexo是什么</h1><h2 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h2><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a>是一款快速，简单且功能强大的博客框架。Node.js 所带来的超快生成速度，让它可以在几秒内瞬间完成上百个页面的渲染。Hexo还支持Github Flavored Markdown的所有功能，甚至可以整合Octopress的大多数插件, 并自己也拥有强大的插件系统，并且仅仅需要简单的配置和几条简单的指令即可完成部署。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><h2 id="Hexo的工作原理"><a href="#Hexo的工作原理" class="headerlink" title="Hexo的工作原理"></a>Hexo的工作原理</h2><h3 id="命令行中的hexo是什么？"><a href="#命令行中的hexo是什么？" class="headerlink" title="命令行中的hexo是什么？"></a>命令行中的hexo是什么？</h3><p>hexo可以粗略分为三个子项目，分别是:</p><ul><li>hexo-cli</li><li>hexo core</li><li>hexo plugins<br>请看下图：<br><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://i.loli.net/2020/05/05/TjtRobvz96xa1Hf.jpg" alt="hexo_projects.png"></li></ul><p>让我们结合这张图来大致看看这三个项目的作用：</p><ul><li>hexo-cli：hexo命令行项目，作用是:<br> 1.启动hexo命令(进程)，及其参数解析机制。每次我们输入’hexo xxx’命令后，都会通过node调用hexo-cli中的entry函数(比如，可以把’hexo init’视为’node hexo-cli/entry.js init’)<br> 2.实现hexo命令的三个初始参数(功能): init / version / help<br> 3.加载hexo核心模块，并初始化</li><li>hexo core: hexo核心，他的主要作用如下:<br> 1.实现了hexo功能扩展对象<br> 2.实现了hexo核心功能, 如new, publish, generate等（其实是一些hexo插件，下文中会详细分析）</li><li>hexo plugins: 指一些能够扩展hexo的插件。插件可以按功能分成两类:<br> 1.扩展hexo命令的参数，如hexo-server(安装这个插件以后才能使用hexo server命令)<br> 2.扩展hexo解析文件的”能力”，如增加jade模版解析功能的hexo-render-jade插件</li></ul><h3 id="从markdown到html"><a href="#从markdown到html" class="headerlink" title="从markdown到html"></a>从markdown到html</h3><p>在hexo中编写的markdown在转化成html的过程中经历了两次模板渲染，如下表格所示：<br><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://i.loli.net/2020/05/05/7SfbthWX6Nu1Imi.jpg" alt="render.png"></p><p>另外还有一张图片：<br><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://i.loli.net/2020/05/05/1z94f5rTFNjqW3H.jpg" alt="post.png"></p><ul><li>hexo core在generate的过程中会产生一个对象，我们在这里把这个对象称为article。第一次渲染的主要目的就是给这个对象添加title,content等属性。其中:<br> 1.article.title, article.date, article.tags, article.categories等属性来自yml front的部分<br> 2.article.content是markdown文章解析后的html片段</li><li>hexo项目目录下包含三个子目录，<br> 1.source目录，写博客的主要工作目录。这个目录下存放的是我们的markdown文章以及js, images, css<br> 2.themes目录，主题目录，定义了即将生成的html的layout, 和html中需要加载的css, js, images<br> 3.public目录, hexo generate的最终输出目录。里面包含了整个博客网站的html, css, js, images</li><li>第二次渲染，需要引入对应模板文件格式的插件，如.ejs文件就需要使用hexo-render-ejs插件，.jade文件需要使用hexo-render-jade插件，而.sass文件则需要hexo-render-sass插件来转换成css文件。hexo的这一设计有点类似webpack中的loader。</li></ul><h3 id="Hexo和git-page"><a href="#Hexo和git-page" class="headerlink" title="Hexo和git page"></a>Hexo和git page</h3><p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://i.loli.net/2020/05/05/KztVwoYfHlBvgaG.jpg" alt="deploy.png"></p><p>如上图所示，用户通过浏览器访问到的git page上的博客网站其实是hexo generate之后生成的public目录下的内容。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
